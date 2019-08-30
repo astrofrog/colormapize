@@ -29,14 +29,15 @@ where ``colormap_name`` is what you want to call your colormap, for example::
 
     colormapize your_image.jpg kittens
 
-This should open a Matplotlib window. Click once to define the
-start of a path and click again to define the end of the path. You can then use
-the + and - keys to add more samples along the path. If you are not happy with
-the path, just click twice again to define a new path. Once you are happy with
-it, press 'enter' and you will see a preview of the colormap on the right of the
+This should open a Matplotlib window. Click once to define the start of a path
+and click again to define the end of the path. You can then use the + and - keys
+to add more samples along the path. If you are not happy with the path, just
+click twice again to define a new path. Once you are happy with it, press
+'enter' or 'c' and you will see a preview of the colormap on the right of the
 image, and the colormap will also be saved to e.g.``cmap_kittens.py``. You can
 continue to redefine the path until you are happy with it, and the file will be
-overwritten every time you press enter. Close the window once you are done.
+overwritten every time you press 'enter' or 'c'. Close the window once you are
+done.
 
 To use, make sure the colormap file (e.g. ``cmap_kittens.py``) is in the same
 directory as the directory where you want to make plots, and you can then use it

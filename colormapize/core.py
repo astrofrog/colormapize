@@ -83,7 +83,7 @@ class ImageColormapMaker:
         elif event.key == '-' and self.n_values > 2:
             self.n_values -= 1
             self.refresh_line()
-        elif event.key == 'enter':
+        elif event.key in ('enter', 'c'):
             x, y = self.get_xy()
             x, y = x.astype(int), y.astype(int)
             colors = self.image_array[y, x, :]
