@@ -39,11 +39,12 @@ class ImageColormapMaker:
         self.colorbar = None
 
         self.fig.canvas.mpl_connect('button_press_event', self.button_press)
+        self.fig.canvas.mpl_connect('button_release_event', self.button_release)
         self.fig.canvas.mpl_connect('key_press_event', self.key_press)
 
         plt.show()
 
-    def button_press(self, event):
+    def button_release(self, event):
 
         if event.inaxes and self.fig.canvas.manager.toolbar._active is None:
 
@@ -52,12 +53,24 @@ class ImageColormapMaker:
                 self.x_values.clear()
                 self.y_values.clear()
 
-            x, y = event.xdata, event.ydata
-            print(f"Adding point at ({x},{y})")
-            self.x_values.append(x)
-            self.y_values.append(y)
+            x, y = event.x, event.y
+            xd, yd = event.xdata, event.ydata
+            if ((self.pressed_xy[0] - x)**2 + (self.pressed_xy[1] - y)**2) > 5:  #sqrt(5) is a great distance!
+                pxd, pyd = self.pressed_xydata
+                print(f"Detected dragging.  Adding start point at ({pxd},{pyd})")
+                self.x_values.append(pxd)
+                self.y_values.append(pyd)
+            print(f"Adding point at ({xd},{yd})")
+            self.x_values.append(xd)
+            self.y_values.append(yd)
 
             self.refresh_line()
+
+    def button_press(self, event):
+
+        if event.inaxes and self.fig.canvas.manager.toolbar._active is None:
+            self.pressed_xydata = event.xdata, event.ydata
+            self.pressed_xy = event.x, event.y
 
     def get_xy(self):
         x = np.linspace(self.x_values[0], self.x_values[1], self.n_values)
