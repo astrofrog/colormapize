@@ -14,7 +14,7 @@ Installing
 
 To install::
 
-    https://github.com/astrofrog/colormapize
+    pip install colormapize
 
 Using
 -----
